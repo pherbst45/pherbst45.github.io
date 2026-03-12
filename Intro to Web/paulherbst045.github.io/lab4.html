@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Order Page</title>
+</head>
+
+<body>
+
+<h1 id="greeting"></h1>
+
+<p id="orderInfo"></p>
+<p id="arrival"></p>
+
+<script>
+
+alert("Welcome to The Lego Store!");
+
+let name = prompt("What is your name?");
+let item = prompt("Hi " + name + ", what Theme of sets would you like to order?");
+let quantity = prompt("How many of these " + item + " sets would you like? (1-99)");
+
+quantity = Number(quantity);
+
+// Check if they ordered 0 items
+if (quantity == 0) {
+    document.getElementById("greeting").innerHTML =
+    "Sorry " + name + ", you must order at least 1 item.";
+
+}
+else if (quantity > 99) {
+    // Check if they ordered too many items
+    document.getElementById("greeting").innerHTML =
+    "Sorry " + name + ", you cannot order more than 99 items.";
+}
+else {
+
+    // Greeting time
+    let hour = new Date().getHours();
+    let greeting;
+
+    if (hour < 12) {
+        greeting = "Good Morning";
+    } else if (hour < 18) {
+        greeting = "Good Afternoon";
+    } else {
+        greeting = "Good Evening";
+    }
+
+    document.getElementById("greeting").innerHTML =
+    greeting + " " + name + ", Thank you for Ordering!";
+
+    document.getElementById("orderInfo").innerHTML =
+    "You ordered " + quantity + " " + item + "(s).";
+
+    // Arrival date
+    let today = new Date();
+    today.setDate(today.getDate() + 7);
+
+    document.getElementById("arrival").innerHTML =
+    "Your order will arrive on: " + today.toDateString();
+}
+
+</script>
