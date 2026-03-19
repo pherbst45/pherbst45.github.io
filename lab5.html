@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration Page</title>
+    <title>Lego Store Registration Page</title>
 </head>
 
 <body>
@@ -13,6 +13,8 @@
     First Name: <input type="text" id="firstName"><br><br>
 
     Last Name: <input type="text" id="lastName"><br><br>
+
+    Username: <input type="text" id="username"><br><br>
 
     Email: <input type="email" id="email"><br><br>
 
@@ -31,12 +33,13 @@ function registerUser() {
 
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
+    let username = document.getElementById("username").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     let dob = document.getElementById("dob").value;
 
     // check if any field is empty
-    if (firstName == "" || lastName == "" || email == "" || password == "" || dob == "") {
+    if (firstName == "" || lastName == "" || username == "" || email == "" || password == "" || dob == "") {
         document.getElementById("output").innerHTML = "Registration Failed: All fields are required.";
         return false;
     }
@@ -51,6 +54,7 @@ function registerUser() {
     let user = {
         firstName: firstName,
         lastName: lastName,
+        username: username,
         email: email,
         password: password,
         dob: dob
@@ -66,6 +70,7 @@ function registerUser() {
     document.getElementById("output").innerHTML =
         "Registration Successful!<br>" +
         "Name: " + user.firstName + " " + user.lastName + "<br>" +
+        "Username: " + user.username + "<br>" +
         "Email: " + user.email + "<br>" +
         "Password: " + hiddenPassword + "<br>" +
         "DOB: " + user.dob;
