@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+</head>
+
+<body>
+
+<h2>Register</h2>
+
+<form onsubmit="return registerUser()">
+
+    First Name: <input type="text" id="firstName"><br><br>
+
+    Last Name: <input type="text" id="lastName"><br><br>
+
+    Email: <input type="email" id="email"><br><br>
+
+    Password: <input type="password" id="password"><br><br>
+
+    Date of Birth: <input type="date" id="dob"><br><br>
+
+    <input type="submit" value="Register">
+
+</form>
+
+<p id="output"></p>
+
+<script>
+function registerUser() {
+
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let dob = document.getElementById("dob").value;
+
+    // check if any field is empty
+    if (firstName == "" || lastName == "" || email == "" || password == "" || dob == "") {
+        document.getElementById("output").innerHTML = "Registration Failed: All fields are required.";
+        return false;
+    }
+
+    // check password
+    if (password.includes("!") == false && password.includes("?") == false) {
+        document.getElementById("output").innerHTML = "Registration Failed: Password must contain ! or ?";
+        return false;
+    }
+
+    // user object
+    let user = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+        dob: dob
+    };
+
+    // mask password
+    let hiddenPassword = "";
+    for (let i = 0; i < user.password.length; i++) {
+        hiddenPassword += "*";
+    }
+
+    // display result
+    document.getElementById("output").innerHTML =
+        "Registration Successful!<br>" +
+        "Name: " + user.firstName + " " + user.lastName + "<br>" +
+        "Email: " + user.email + "<br>" +
+        "Password: " + hiddenPassword + "<br>" +
+        "DOB: " + user.dob;
+
+    return false;
+}
+</script>
+
+</body>
+</html>
