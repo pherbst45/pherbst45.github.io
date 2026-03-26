@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat Facts</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+
+        img {
+            width: 300px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cat Facts</h1>
+
+    <!-- Button -->
+    <button onclick="getCatFacts()">Load Cat Facts</button>
+
+    <br><br>
+
+    <!-- Image -->
+    <img id="catImage" src="https://via.placeholder.com/300" alt="Cat Image">
+
+    <br><br>
+
+    <!-- Table -->
+    <table id="factsTable">
+        <tr>
+            <th>factId</th>
+            <th>fact</th>
+        </tr>
+    </table>
+
+    <script>
+        function getCatFacts() {
+            fetch("https://brianobruno.github.io/cats.json")
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+
+                    // SORT by factId
+                    data.facts.sort(function(a, b) {
+                        return a.factId - b.factId;
+                    });
+
+                    // GET table
+                    var table = document.getElementById("factsTable");
+
+                    // CLEAR old rows (except header)
+                    table.innerHTML = `
+                        <tr>
+                            <th>factId</th>
+                            <th>fact</th>
+                        </tr>
+                    `;
+
+                    // ADD rows
+                    for (var i = 0; i < data.facts.length; i++) {
+                        var row = table.insertRow();
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+
+                        cell1.innerHTML = data.facts[i].factId;
+                        cell2.innerHTML = data.facts[i].fact;
+                    }
+
+                    // UPDATE image
+                    document.getElementById("catImage").src = data.catPhoto;
+                });
+        }
+    </script>
+
+</body>
+</html>
